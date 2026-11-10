@@ -1,0 +1,27 @@
+# Competition data and derived artifacts (large, redistribution-restricted)
+data/
+results/
+
+# Project-local caches (uv, Hugging Face, pip, matplotlib)
+.cache/
+
+# Secrets (Kaggle token, SSH keys)
+.secrets/
+.env.local
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Submission build output
+submission/build/
+*.zip
+
+# macOS
+.DS_Store
+
+# Guard against credentials dropped in the project root
+kaggle.json
+*.pem

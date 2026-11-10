@@ -1,0 +1,8 @@
+# Per-task budgets read by the scorer (only these four keys are honoured).
+# ~120 hidden tasks run sequentially within 12 h: 5 min of agent time per task
+# leaves headroom for container setup, which is excluded from this budget.
+evaluation:
+  timeout_seconds: 120
+  max_tool_calls: 60
+  max_time_minutes: 5
+  max_turns: 60
