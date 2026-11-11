@@ -1,10 +1,10 @@
-<!-- body word count: 2980 (whitespace-split words of everything after this line, references included; table separator rows and "|" tokens excluded; limit 3,000) -->
+<!-- body word count: 2983 (whitespace-split words of everything after this line, references included; table separator rows and "|" tokens excluded; limit 3,000) -->
 
 # Code Graphs Are Not Enough: An Audit, a Repair and Identification Keys for Localization with a Local Gemma 4
 
 ## Abstract
 
-The competition provides per-commit code graphs and a `search_similar_code` tool. We audited them: the graphs omit every `async` function (0 of 55 gold async symbols), contain one edge type and leave 38% of nodes isolated, and the embeddings are so anisotropic (participation ratio 2.4 of 256) that the tool reaches 10% recall of gold locations, against 20% for plain name lookup. We release a stdlib-only AST graph builder that fixes these defects and a gold-patch localization benchmark (129 competition tasks, 153 held-out SWE-bench Verified tasks). Propagating scores over the call graph does not beat BM25. We then frame localization as an identification key, borrowing from taxonomy. With Gemma 4 31B run locally, a flat multi-access key and a dichotomous key each lift unit@1 by about .3 over their own retrieval, on train and on held-out repositories. The flat key's train advantage over the dichotomous key (+.099, 95% CI [+.025, +.174]) does not replicate (+.007, [-.060, +.073]), but it needs one call and about 40% fewer prompt tokens. End to end, a simplified agent with a budget-oriented prompt scores about 0.16 on the public leaderboard (sample agent: 0.06, one submission). Adding a BM25 localization skill, which supplies the candidate list without the key step, changes the score by -0.002 (95% CI [-0.032, +0.026], five submissions per arm): no measurable effect.
+The competition provides per-commit code graphs and a `search_similar_code` tool. We audited them: the graphs omit every `async` function (0 of 55 gold async symbols), contain one edge type and leave 38% of nodes isolated, and the embeddings are so anisotropic (participation ratio 2.4 of 256) that the tool reaches 10% recall of gold locations, against 20% for plain name lookup. We release a stdlib-only AST graph builder that fixes these defects and a gold-patch localization benchmark (129 competition tasks, 153 held-out SWE-bench Verified tasks). Propagating scores over the call graph does not beat BM25. We then frame localization as an identification key, borrowing from taxonomy. With Gemma 4 31B run locally, a flat multi-access key and a dichotomous key each lift unit@1 by about .3 over their own retrieval, on train and on held-out repositories. The flat key's train advantage over the dichotomous key (+.099, 95% CI [+.025, +.174]) does not replicate (+.007, [-.060, +.073]), but it needs one call and about 40% fewer prompt tokens. End to end, a simplified agent with a budget-oriented prompt scores about 0.15 on the public leaderboard (sample agent: 0.06, one submission). Adding a BM25 localization skill, which supplies the candidate list without the key step, changes the score by +0.004 (95% CI [-0.023, +0.031], six control and five skill submissions): no measurable effect.
 
 ## 1 Introduction
 
@@ -147,12 +147,12 @@ One configuration resubmitted varies by about 3 tasks of 58 (SD about 1.6, from 
 | arm | n | public scores | mean | SD |
 |---|---|---|---|---|
 | `baseline_v0` | 1 | 0.06 | | |
-| `v1_budget` | 5 | 0.20, 0.18, 0.15, 0.13, 0.13 | 0.158 | 0.031 |
+| `v1_budget` | 6 | 0.20, 0.18, 0.15, 0.13, 0.13, 0.12 | 0.152 | 0.032 |
 | `v2_skill` | 5 | 0.18, 0.13, 0.15, 0.15, 0.17 | 0.156 | 0.019 |
 
-`v2_skill` minus `v1_budget` is -0.002, 95% CI [-0.032, +0.026], about 0.1 task (Mann-Whitney U = 12.5, p = 1.0). The spread within each arm matches the resubmission noise. Dropping the first `v1_budget` score, submitted a day before the A/B protocol was fixed, gives +0.008. At this n a gain above about 1.5 tasks is unlikely; a smaller effect either way is not excluded.
+`v2_skill` minus `v1_budget` is +0.004, 95% CI [-0.023, +0.031], about 0.2 task (Mann-Whitney U = 17.5, p = 0.75). The spread within each arm matches the resubmission noise. Dropping the first `v1_budget` score, submitted a day before the A/B protocol was fixed, gives +0.014. At this n a gain above about 2 tasks is unlikely; a smaller effect either way is not excluded.
 
-The gain over the sample agent belongs to `v1_budget` as a whole (no sub-agent or graph tools, 7 minutes instead of 5, the budget prompt); we did not ablate it. The A/B tests retrieval only: the skill supplies a BM25 list (unit@1 .157 offline) and leaves the choice among cards, which lifted unit@1 by about .3 in Section 5, to the agent's own loop. The key itself is untested end to end, and localization may not be what limits an agent that resolves 16% of tasks. Task logs on the private set are not accessible, so we cannot tell how often the agent called the skill or whether it used the result.
+The gain over the sample agent belongs to `v1_budget` as a whole (no sub-agent or graph tools, 7 minutes instead of 5, the budget prompt); we did not ablate it. The A/B tests retrieval only: the skill supplies a BM25 list (unit@1 .157 offline) and leaves the choice among cards, which lifted unit@1 by about .3 in Section 5, to the agent's own loop. The key itself is untested end to end, and localization may not be what limits an agent that resolves 15% of tasks. Task logs on the private set are not accessible, so we cannot tell how often the agent called the skill or whether it used the result.
 
 ## 7 Related work
 

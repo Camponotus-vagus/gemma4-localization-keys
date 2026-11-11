@@ -21,4 +21,4 @@ Una riga per sottomissione. `sha256` = hash del bundle calcolato da `scripts/bui
 | 2026-11-05 01:11 | 58004691 | `v2_skill` | c3368f341cf4 | A/B arm B: v1_budget + repo-localization skill (only change) | 0,15 | |
 | 2026-11-07 18:22 | 58101249 | `v1_budget` | eca6ba42690c | A/B arm A: control | 0,13 | |
 | 2026-11-09 07:46 | 58156421 | `v2_skill` | c3368f341cf4 | A/B arm B: v1_budget + repo-localization skill (only change) | 0,17 | |
-| 2026-11-10 10:06 | 58196428 | `v1_budget` | eca6ba42690c | A/B arm A: control | in attesa | |
+| 2026-11-10 10:06 | 58196428 | `v1_budget` | eca6ba42690c | A/B arm A: control | 0,12 | |
