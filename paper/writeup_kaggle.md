@@ -1,4 +1,4 @@
-<!-- Kaggle Writeup fields. Title: first heading of draft_v0.md. Subtitle: line below. Project links: GitHub repo and g4a-repro notebook. Body: everything after the subtitle line. Regenerate from paper/draft_v0.md after any edit. -->
+<!-- Kaggle Writeup fields, submitted 2026-11-11. Title (80-char limit): "Code Graphs Are Not Enough: Identification Keys for Localization with Gemma 4". Subtitle (140-char limit) as on Kaggle: "The provided graph tools miss every async function; an identification key lifts unit@1 by about .3; a BM25 skill leaves the score unchanged." Thumbnail: paper/figures/thumbnail_kaggle.png. Project links: GitHub repo and g4a-repro notebook. Body: everything after the subtitle line below. Regenerate from paper/draft_v0.md after any edit. -->
 Subtitle: The provided graph tools miss every async function; an identification key lifts unit@1 by about .3 with Gemma 4 31B, while a BM25 skill leaves the leaderboard score unchanged.
 
 ## Abstract
